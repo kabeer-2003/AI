@@ -1,0 +1,48 @@
+N = 8  
+
+
+def print_board(board):
+    for row in board:
+        print(" ".join(row))
+    print()
+
+
+def is_safe(board, row, col):
+  
+    for i in range(row):
+        if board[i][col] == 'Q':
+            return False
+    
+    
+    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+        if board[i][j] == 'Q':
+            return False
+    
+   
+    for i, j in zip(range(row, -1, -1), range(col, N)):
+        if board[i][j] == 'Q':
+            return False
+    
+    return True
+
+
+def solve_queens(board, col):
+    if col >= N:
+        return True
+    
+    for i in range(N):
+        if is_safe(board, i, col):
+            board[i][col] = 'Q'
+            
+            if solve_queens(board, col + 1):
+                return True
+            
+            board[i][col] = '.'  # Backtrack if no solution is found
+    
+    return False
+chessboard = [['.' for _ in range(N)] for _ in range(N)]
+if solve_queens(chessboard, 0):
+    print("Solution:")
+    print_board(chessboard)
+else:
+    print("No solution found.")
