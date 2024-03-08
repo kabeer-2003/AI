@@ -1,0 +1,24 @@
+% Facts about parent relationships
+parent(john, jim).
+parent(john, ann).
+parent(ann, peter).
+parent(ann, lisa).
+parent(peter, bob).
+parent(peter, alice).
+
+% Rules to define parent-child relationship
+child(X, Y) :- parent(Y, X).
+
+
+
+% Example queries
+% Who are the children of John?
+?- child(jim, john).
+?- child(ann, john).
+
+% Who are the parents of Alice?
+?- parent(Parent, alice).
+
+
+
+
